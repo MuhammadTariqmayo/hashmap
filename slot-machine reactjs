@@ -1,0 +1,63 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './App.css'
+
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+);
+
+
+import React from 'react';
+import SlotM from './Slotmach';
+import './App.css'
+
+  
+     const App =()=>{
+    return(
+        <> 
+            <h1 className="heading_style"> 🎰Welcome to <span className="atta">Slot Machine🎰</span></h1>
+          
+          <div className="slot_machine">
+          <SlotM x="🍎" y="🍎" z="🍎"/>
+            <SlotM x="😄" y="💋" z="💁"/>
+            <SlotM x="😠" y="😠" z="😠"/>
+            <SlotM  x="🍌" y="🍎" z="👨‍🏭"/>
+            <SlotM  x="❤️" y="❤️" z="❤️"/>
+            
+            
+            </div>
+           </>
+    );
+     };
+
+export default App;
+
+
+
+
+*{
+  margin: 0;padding: 0; box-sizing: border-box;background-color: #d2dbdd;
+}
+.heading_style{ text-shadow: 2px 2px 2px orange;
+  padding: 35px 0;
+  text-align: center;
+  font-family: "Raleway", sans-serif; text-transform: uppercase;
+  font-size: 15px; letter-spacing: 2px;font-weight: 500;
+  background-color:#868686;font-size: 2rem;margin-bottom: 30px;
+}
+.slot_inner{
+  text-align: center;
+  color: #e84118;
+}
+.atta{
+  font-size: 500; text-shadow: 2px 4px 3px red;
+  font-weight: bold;
+}
+
+.slot_inner :hover{
+  box-shadow: 0px 30px 18px -8px rgba(0,0,0,0.1);
+  transform: scale(1.05,1.05);
+}
+
