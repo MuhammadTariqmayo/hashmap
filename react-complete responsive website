@@ -1,0 +1,468 @@
+Main file===index.js====
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import {BrowserRouter} from 'react-router-dom';
+
+
+ReactDOM.render(
+  <>
+  <BrowserRouter>
+    <App />
+    </BrowserRouter>
+    </>
+  ,
+  document.getElementById('root')
+);
+
+=====App.jsx===
+import React from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
+import Contact from './Contact';
+import About from './About';
+import Services from './Services';
+import Home from './Home';
+import  Footer from './Footer';
+import Navbar from './Navbar';
+import {Switch,Route, Redirect } from 'react-router-dom';
+
+
+const App = () =>{
+  return(
+    <>
+
+        <Navbar/>
+    <Switch>
+    <Route exact path="/" component={Home}/>
+    <Route exact path="/about" component={About}/>
+    <Route exact path="/services" component={Services}/>
+    
+    <Route exact path="/contact" component={Contact}/>
+    <Redirect to="/"/>
+   </Switch>
+   <Footer/>
+    </>
+  )
+}
+
+export default App;
+======Navbar======
+import React from 'react';
+import './index.css';
+import { NavLink } from 'react-router-dom';
+
+
+const Navbar = () =>{
+  return(
+    <>
+    <div className="container-fluid nav_bg">
+        <div className="row">
+            <div className="col-10 mx-auto">
+             
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+  <div className="container-fluid">
+    <NavLink className="navbar-brand" to="/">Kasuri Developers</NavLink>
+    <button className="navbar-toggler" type="button" data-toggle="collapse"
+     data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" 
+    aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+
+          <NavLink 
+          activeClassName="menu_active"
+          exact
+           className="nav-link active" 
+          aria-current="page" to="/">
+          Home
+          </NavLink>
+        </li>
+        <li className="nav-item">
+
+          <NavLink 
+          activeClassName="menu_active" 
+          className="nav-link"
+           to="/services">
+          Services
+          </NavLink>
+        </li>
+        <li className="nav-item">
+
+          <NavLink
+           activeClassName="menu_active"
+           className="nav-link" 
+          to="/about">
+          About
+          </NavLink>
+        </li>
+        <li className="nav-item">
+
+          <NavLink
+           activeClassName="menu_active" 
+          className="nav-link"
+           to="contact">
+          Contact
+          </NavLink>
+        </li>
+       
+       
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+   
+   </div>
+        </div>
+    </div>
+    </>
+  )
+}
+
+export default Navbar;
+
+===Home.jsx====
+import React from 'react';
+
+import bro from '../src/images/bro.jpg';
+import Common from './Common';
+
+
+const Home = () =>{
+  return(
+    <>
+     <Common name="Grow your business with" imgsrc={bro} visit="/services" btnname="Get Started"/>
+    </>
+  )
+}
+
+export default Home;
+=====Services===
+import React from 'react';
+
+import Cardz from './Cardz';
+import Sdata from './Sdata'
+
+
+const Services = () =>{
+  return(
+    <>
+        <div className="my-5">
+   <h1 className="text-center">Our Services</h1>
+   </div>
+   <div className="container-fluid mb-5">
+        <div className="row">
+            <div className="col-10 mx-auto">
+              <div className="row gy-4">
+             {
+               Sdata.map((val,ind) =>{
+                return <Cardz
+                  imgsrc={val.imgsrc}
+                  key={ind}
+                  title={val.title}
+                />
+               })
+             }
+                </div>
+              </div>
+              </div>
+              </div>
+    </>
+  )
+}
+
+export default Services;
+
+====About.jsx=====
+
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import la from '../src/images/la.jpg';
+import Common from './Common';
+
+
+const About = () =>{
+  return(
+    <>
+    <Common name="Welcome to About Page" imgsrc={la} visit="/contact" btnname="Contact Now"/>
+    </>
+  )
+}
+
+export default About;
+=====Common.jsx====>same data used in Home.jsx And Home.jsx===
+
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+
+
+const Common = (props) =>{
+  return(
+    <>
+     <section id="header" className="d-flex align-items-center ">
+     <div className="container-fluid ">
+        <div className="row">
+            <div className="col-10 mx-auto">
+            <div className="row">
+              <div className="col-md-6 pt-5 mt-5 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center flex-column">
+                      <h1>{props.name}<br/> <strong className="brand-name"> Kasuri Developers</strong></h1>
+                      <h2 className="my-3">We are the team of talented developer making websites</h2>
+                      <div className="mt-3">
+
+                    
+                      
+                     
+                      <NavLink to={props.visit} className="btn btn-outline-primary btn-lg">
+                      {props.btnname}
+                        </NavLink>
+                        
+                        
+                        
+                      </div>
+              </div>
+
+              <div className="col-lg-6 order-1 order-lg-2 header-img">
+                          <img src={props.imgsrc} className="img-fluid animated w-100" alt="home img"/>
+              </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     </section>
+    </>
+  )
+}
+
+export default Common;
+
+=====Contact.jsx=====
+
+import React, { useState } from 'react';
+
+
+const Contact= () =>{
+  const [data,setData] = useState({ fullname:"",fathername:"",mobileno:"" , mail:"",  msg:"", })
+  
+  const InputEvent = (event) =>{
+    const {name,value} =event.target;
+    setData((preVal) =>{
+      return{
+        ...preVal,
+        [name]:value,
+      }
+    })
+  }
+
+ const formSubmit = (e) =>{
+  e.preventDefault(); 
+  alert(`My name is ${data.fullname}.My Father name is ${data.fathername}.My Mobile no is ${data.mobileno}
+  . My email adress is ${data.mail} and my msg is ${data.msg}`)
+ }
+ 
+
+ 
+  return(
+    <>
+      <div className="my-5">
+        <h1 className="text-center ">Contact Us</h1>
+      </div>
+      <div className="container contact_div">
+        <div classNam="row">
+       <div className="col-md-6 col-10 mx-auto">
+            <form onSubmit={formSubmit} >
+            <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+  <input type="text" 
+  class="form-control"
+   id="exampleFormControlInput1"
+   name="fullname" value={data.fullname} onChange={InputEvent}  
+  placeholder="Enter your name..."/>
+
+  <br/>
+  <label for="exampleFormControlInput1" class="form-label">Father Name</label>
+  <input type="text"
+   class="form-control"
+   id="exampleFormControlInput1"  
+   name="fathername" value={data.fathername} onChange={InputEvent}
+  placeholder="Enter Your Father Name..."/>
+
+  <br/>
+  <label for="exampleFormControlInput1" class="form-label">Mobile No</label>
+  <input type="number"
+   class="form-control" 
+  id="exampleFormControlInput1" 
+  name="mobileno" value={data.mobileno} onChange={InputEvent} 
+  placeholder="Your mobile num..."/>
+
+  <br/>
+  <label for="exampleFormControlInput1" class="form-label">Your Email Adress</label>
+  <input type="email" 
+  class="form-control"
+   id="exampleFormControlInput1" 
+   name="mail" value={data.mail} onChange={InputEvent}
+   placeholder="name@example.com"/>
+
+  <br/>
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Message:</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1"  name="msg" value={data.msg} onChange={InputEvent} rows="3"></textarea>
+</div>
+          <div class="col-12">
+    <button class="btn btn-outline-primary" type="submit">Submit form</button>
+  </div>
+            </form>
+       </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Contact;
+
+=====Footer.jsx====
+import React from 'react'
+
+const Footer = () =>{
+    return(
+        <>
+            <footer className="w-100 bg-light text-center" >
+                <p>2020 KasuriDevekopers.All Rights Reserved | Terms and Conditions</p>
+            </footer>
+        </>
+    )
+}
+export default Footer;
+
+=====Cardz.jsx==
+
+import React from 'react';
+
+import { NavLink } from 'react-router-dom';
+
+
+
+const Cardz = (props) =>{
+  return(
+    <>
+  
+                   <div className="col-md-4 col-10 mx-auto">
+                   <div className="card">
+            <img src={props.imgsrc} className="card-img-top" alt={props.imgsrc} height="280"/>
+           <div className="card-body">
+             <h5 className="card-title font-weight-bold">{props.title}</h5>
+         <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <NavLink to="/" className="btn btn-primary">Go somewhere</NavLink>
+                   </div>
+                   </div>
+                   </div>
+              
+    </>
+  )
+}
+
+export default Cardz;
+
+===Sdata.jsx==>Cardz pics data======
+
+import meo from '../src/images/meo.jpg'
+import meo1 from '../src/images/meo1.jpg'
+import meo3 from '../src/images/meo3.jpg'
+import meo4 from '../src/images/meo4.jpg'
+import meo5 from '../src/images/meo5.jpg'
+import meo6 from '../src/images/meo6.jpg'
+
+const Sdata =[
+    {
+        imgsrc:meo,
+        title:"Software developers"
+    },
+
+    {
+        imgsrc:meo1,
+        title:"Angular developers"
+    },
+
+    {
+        imgsrc:meo3,
+        title:"Atta Ullah Saeed"
+    },
+
+    {
+        imgsrc:meo4,
+        title:"website developers"
+    },
+
+    {
+        imgsrc:meo5,
+        title:"webcame developers"
+    },
+
+    {
+        imgsrc:meo6,
+        title:"webb developers"
+    }
+];
+export default Sdata;
+
+===index.css======
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+*{
+    padding: 0; margin: 0; box-sizing: border-box;font-family: 'Mulish', sans-serif;
+}
+.navbar{
+    background-color: #fff!important;
+}
+.navbar-brand{
+    font-size: 1.9rem!important;
+    color: #565387!important;
+
+}
+.navbar a{
+    font-size: 1.3rem;
+    text-transform: capitalize;
+}
+.menu_active{
+    font-weight: bold; border-bottom: 1px solid#565387;
+}
+.navbar a:hover{
+    color: #3498db!important;
+}
+@media (max-width:991px){
+    .navbar-brand{
+        font-size: 1.5rem!important;
+    }
+    .menu_active{
+        font-weight: bold;
+        border-bottom: none;
+    }
+}
+.brand-name{
+    color: blue; 
+    text-shadow: 2px 2px 2px orange;
+}
+#header{
+  width: 100%;
+  height: 80vh;
+  margin-top: 70px;
+}
+#header h1{
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    color: black;
+}
+#header h2{
+    color: #484848;
+    font-size: 24px;
+}
+.header-img{
+    text-align: left;
+    }
