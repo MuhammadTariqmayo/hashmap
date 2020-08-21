@@ -1,0 +1,167 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Cards from './Cards';
+import Arry from './Arry';
+ 
+ReactDOM.render(
+     <>
+     <h1 className='atta'>List of top 6 my favorite Netflix series</h1>
+     { Arry.map((val)=>{
+          return(
+                   
+          <Cards  sname={val.sname}
+          imgsrc={val.imgsrc}
+           title={val.title}
+     />
+          );
+     })}
+     
+     );   
+     </>                   
+      ,document.getElementById('root')
+);
+
+
+====='Cards' component file====
+import React from 'react';
+import './App.css';
+
+function Cards(props)
+
+{     
+  return(
+    <>
+    <div className="cards_SS">
+              <div className="card_s">
+           <img src={props.imgsrc} alt="mypic" className="card_img "/>
+         <div className="card_info">
+  <span className="card_category">{props.title}</span>
+  <h3 className="card_title">{props.sname}</h3>
+           <a href="" target="_blank">
+             <button>Watch now</button>
+           </a>
+         </div>
+ 
+ 
+              </div>
+    </div>
+    </>
+  )
+}
+export default Cards;
+
+======'Arry' component file'====
+
+
+ const Arry=[
+{
+    sname:"Super girl",
+   imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQi_U85cH0r6LyynY_2xsQn5Knw847vNBaZug&usqp=CAU",
+    title:"A Netflix original series",
+    
+
+},
+         {sname:"London has fallen",
+     imgsrc:"https://wallpapercave.com/wp/wp4224883.jpg",
+            title:"A Netflix original series",
+           
+         },
+
+{
+    sname:" DARK",
+     imgsrc:"https://wallpapercave.com/wp/wp7014827.jpg",
+            title:"A Netflix original series",
+},
+
+
+{
+    sname:"THOR",
+     imgsrc:"https://wallpapercave.com/wp/wp4582219.jpg",
+            title:"A Netflix original series",
+},
+{
+    sname:"The Protector",
+     imgsrc:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRTawyFKiEMRPDuB20IR2bx_kPLqz66L-6kWA&usqp=CAU",
+            title:"A Netflix original series",
+},
+{
+    sname:"Spiderman ",
+     imgsrc:"https://wallpapercave.com/wp/wp6240088.jpg",
+            title:"A Netflix original series",
+}
+]
+export default Arry; 
+
+====css file========
+
+*{
+  margin: 0;padding: 0; box-sizing: border-box;background-color: #d2dbdd;
+}
+.atta{ text-shadow: 2px 2px 2px blue;
+  padding: 35px 0;
+  text-align: center;
+  font-family: "Raleway", sans-serif; text-transform: uppercase;
+  font-size: 15px; letter-spacing: 2px;font-weight: 500;
+  background-color:#868686;font-size: 2rem;margin-bottom: 30px;
+}
+.cards_SS{
+  width: 100%; height: auto;
+}
+.card_s{
+  margin: 6%; transition: all 0.4s cubic-bezier(0.175,0.885,0,1); background-color: #fff;
+  width: 21.25%; border-radius: 12px;box-shadow: 0px 13px 10px -7px rgba(0,0,0,0.1);float: left;
+}
+.card_s:hover{
+  box-shadow: 0px 30px 18px -8px rgba(0,0,0,0.1);
+  transform: scale(1.05,1.05);
+}
+.card_img{
+  width: 100%;height: 235px; border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.card_info{
+  background-color: #fff; border-bottom-left-radius: 12px;border-bottom-right-radius: 12px;
+  padding: 16px 24px 24px 24px;background-color: #fff;
+}
+.card_category{
+  font-family: sans-serif;text-transform: uppercase;font-size: 13px;letter-spacing: 2px;
+  font-weight: 500;
+  color: #868686;background-color: #fff;
+}
+.card_title{
+  margin-top: 5px;margin-bottom: 10px;font-family: sans-serif;background-color: #fff;
+  text-transform: uppercase;
+}
+button{
+  padding: 5px 8px ;
+  font-family: serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #868686;
+  background-color: #fff;
+  outline: none; border: 1px solid black;
+}
+
+===App===
+import React from './react';
+import Cards from './Cards';
+import Arry from './Arry';
+
+
+const App=()=>(
+
+<>
+<h1 className='atta'>List of top 6 my favorite Netflix series</h1>
+{ Arry.map((val)=>{
+     return(
+              
+     <Cards  sname={val.sname}
+     imgsrc={val.imgsrc}
+      title={val.title}
+/>
+     );
+})}
+</>
+);
